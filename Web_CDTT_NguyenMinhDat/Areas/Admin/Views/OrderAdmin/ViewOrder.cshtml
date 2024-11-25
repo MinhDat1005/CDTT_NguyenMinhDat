@@ -1,0 +1,98 @@
+﻿@using Web_CDTT_NguyenMinhDat.Models
+@model IEnumerable<OrderDetail>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+    decimal total = 0;
+    decimal subtotal = 0;
+}
+<h3>List Order</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-warning">
+            <th scope="col">#</th>
+            <th scope="col">Order Code</th>
+            <th scope="col">Username</th>
+
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Product Quantity</th>
+
+            <th scope="col">ShippingCod</th>
+           @*  <th scope="col">CouponCod</th> *@
+
+           
+            <th scope="col">Subtotal</th>
+
+           
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            subtotal = item.Quantity * item.Price + @ViewBag.ShippingCod;
+            total += subtotal;
+            <tr>
+                <input type="hidden" asp-for="@item.OrderCode" class="getId"/>
+                <th>@item.Id</th>
+                <th scope="row">@item.OrderCode</th>
+                <td>@item.UserName</td>
+                <td>@item.Product.Name</td>
+                <td>@item.Price.ToString("#,##0 VNĐ")</td>
+                <td>@item.Quantity</td>
+                <td>@ViewBag.ShippingCod.ToString("#,##0 VNĐ")</td>
+
+                <td>@subtotal.ToString("#,##0 VNĐ")</td>
+
+
+            </tr>
+        }
+        <tr>
+            <th colspan="5">Total:</th>
+            <td>@total.ToString("#,##0 VNĐ")</td>
+            <td>
+                <select class="form-control select-update-order">
+                    <option value="1">Chờ xác nhận</option>
+                    <option value="0">Đã xác nhận</option>
+                </select>
+            </td>
+        </tr>
+
+
+    </tbody>
+</table>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.select-update-order').change(function (e) {
+                e.preventDefault();
+
+                // Lấy giá trị của `status` từ select và `ordercode` từ input
+                var status = $(this).val();
+                var ordercode = $(".getId").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateOrder")",
+                    data: { status: status, ordercode: ordercode }, // sửa lại cú pháp data
+                    success: function (result) {
+                        if (result.success) {
+                            Swal.fire("Update succeeded");
+                            
+                        } else {
+                            Swal.fire("Update error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("There was an error processing your request.");
+                    }
+                });
+            });
+        });
+    </script>
+}

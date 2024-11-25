@@ -1,0 +1,384 @@
+﻿@using Web_CDTT_NguyenMinhDat.Models.ViewModels
+@model ProductDetailViewModel 
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			<!-- Product main img -->
+			<div class="col-md-5 col-md-push-2">
+				<div id="product-main-img">
+					<div class="product-preview">
+						<img src="~/images/@Model.ProductDetail.Image" alt="@Model.ProductDetail.Name">
+					</div>
+
+				</div>
+			</div>
+			<!-- /Product main img -->
+			<!-- Product thumb imgs -->
+			<div class="col-md-2 col-md-pull-5">
+				<div id="product-imgs">
+					<div class="product-preview">
+						<img src="~/images/@Model.ProductDetail.Image" alt="@Model.ProductDetail.Name">
+					</div>
+
+				</div>
+			</div>
+			<!-- /Product thumb imgs -->
+			<!-- Product details -->
+			<div class="col-md-5">
+				<div class="product-details">
+					<h2 class="product-name">@Model.ProductDetail.Name</h2>
+					<div>
+						<div class="product-rating">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star-o"></i>
+						</div>
+						<a class="review-link" href="#">10 Review(s) | Add your review</a>
+					</div>
+					<div>
+						<h3 class="product-price">@Model.ProductDetail.Price.ToString("#,##0 VNĐ") <del class="product-old-price"></del></h3>
+						@*                 <span class="product-available">In Stock</span>
+						*@
+					</div>
+					<p>@Model.ProductDetail.Description</p>
+
+					<div class="add-to-cart ">
+						<div class="qty-label">
+							Qty
+							<div class="input-number">
+								<input type="number" min="1" value="1">
+								<span class="qty-up">+</span>
+								<span class="qty-down">-</span>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary add-to-cart-btn" data-product_id="@Model.ProductDetail.Id" @(Model.ProductDetail.Quantity > 0 ? "" : "disabled")>
+							<i class="fa fa-shopping-cart"></i> @(Model.ProductDetail.Quantity > 0 ? "Thêm vào giỏ" : "Hết hàng")
+							</button>
+
+					
+
+					</div>
+
+					<ul class="product-btns">
+						<li class="add-to-wishlist" data-product_id=" @Model.ProductDetail.Id" ><a href="#"><i class="fa fa-heart-o"></i> Add to Wishlist</a></li>
+						<li class="add-to-compare" data-product_id=" @Model.ProductDetail.Id"><a href="#"><i class="fa fa-exchange"></i> Add to Compare</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Category:</li>
+						<li><a href="#">@Model.ProductDetail.Category.Name</a></li>
+					</ul>
+					<ul class="product-links">
+						<li>Brand:</li>
+						<li><a href="#">@Model.ProductDetail.Brand.Name</a></li>
+					</ul>
+
+					<ul class="product-links">
+						<li>Share:</li>
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /Product details -->
+			<!-- Product tab -->
+			<div class="col-md-12">
+				<div id="product-tab">
+					<!-- product tab nav -->
+					<ul class="tab-nav">
+						<li class="active"><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+						<li><a data-toggle="tab" href="#tab1">Description</a></li>
+						<li><a data-toggle="tab" href="#tab2">Details</a></li>
+					</ul>
+					<!-- /product tab nav -->
+					<!-- product tab content -->
+					<div class="tab-content">
+						<!-- tab1  -->
+						<div id="tab1" class="tab-pane fade in ">
+							<div class="row">
+								<div class="col-md-12">
+									<p>@Model.ProductDetail.Description</p>
+								</div>
+							</div>
+						</div>
+						<!-- /tab1  -->
+						<!-- tab2  -->
+						<div id="tab2" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-md-12">
+									<p></p>
+								</div>
+							</div>
+						</div>
+						<!-- /tab2  -->
+						<!-- tab3  -->
+						<div id="tab3" class="tab-pane fade in active">
+							<div class="row">
+								<!-- Rating -->
+								<div class="col-md-3">
+									<div id="rating">
+										<div class="rating-avg">
+											<span>4.5</span>
+											<div class="rating-stars">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-o"></i>
+											</div>
+										</div>
+										<ul class="rating">
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: 80%;"></div>
+												</div>
+												<span class="sum">3</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div style="width: 60%;"></div>
+												</div>
+												<span class="sum">2</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div></div>
+												</div>
+												<span class="sum">0</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div></div>
+												</div>
+												<span class="sum">0</span>
+											</li>
+											<li>
+												<div class="rating-stars">
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+												<div class="rating-progress">
+													<div></div>
+												</div>
+												<span class="sum">0</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<!-- /Rating -->
+								<!-- Reviews -->
+								<div class="col-md-6">
+									<div id="reviews ">
+										<ul class="reviews">
+
+											<li>
+												<div class="review-heading">
+													<h5 class="name">John</h5>
+													<p class="date">27 DEC 2018, 8:0 PM</p>
+													<div class="review-rating">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o empty"></i>
+													</div>
+												</div>
+												<div class="review-body">
+													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+												</div>
+											</li>
+										</ul>
+
+									</div>
+								</div>
+								<!-- /Reviews -->
+								<!-- Review Form -->
+								<div class="col-md-3">
+									<div id="review-form">
+										<form class="review-form" autocomplete="off" asp-action="CommentProduct" asp-controller="Product" method="post"> 
+											<input asp-for="@Model.ProductDetail.Id" name="ProductId" type="hidden"/>
+											<input name="Star" type="hidden" value="4" />
+
+											<input class="input" asp-for="@Model.Name" type="text" placeholder="Your Name">
+											<span asp-validation-for="@Model.Name" class="text-danger" />
+
+											<input class="input" asp-for="@Model.Email" type="email" placeholder="Your Email">
+											<span asp-validation-for="@Model.Email" class="text-danger" />
+
+											<textarea  asp-for="@Model.Comment" placeholder="Your Review"></textarea>
+											<span asp-validation-for="@Model.Comment" class="text-danger" />
+											@* <div class="input-rating">
+												<span>Your Rating: </span>
+												<div class="stars">
+													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+												</div>
+											</div> *@
+											<button type="submit" class="primary-btn">Submit</button>
+										</form>
+									</div>
+								</div>
+								<!-- /Review Form -->
+							</div>
+						</div>
+						<!-- /tab3  -->
+					</div>
+					<!-- /product tab content  -->
+				</div>
+			</div>
+			<!-- /product tab -->
+		</div>
+	</div>
+</div>
+<!-- Section -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="section-title text-center">
+					<h3 class="title">Related Products</h3>
+				</div>
+			</div>
+
+
+			@foreach (var relatedProduct in @ViewBag.RelatedProducts as IEnumerable<ProductModel>)
+			{
+				<div class="col-md-3 col-xs-6">
+					<div class="product">
+						<a asp-action="Details" asp-controller="Product" asp-route-Id="@relatedProduct.Id">
+							<div class="product-img">
+								<img src="~/images/@relatedProduct.Image" alt="@relatedProduct.Name">
+							</div>
+							<div class="product-body">
+								<p class="product-category">@relatedProduct.Category.Name</p>
+								<p class="product-brand">@relatedProduct.Brand.Name</p>
+								<h3 class="product-name"><a href="#">@relatedProduct.Name</a></h3>
+								<h4 class="product-price">@relatedProduct.Price.ToString("#,##0 VNĐ") @* <del class="product-old-price">@relatedProduct.Price.ToString("#,##0 VNĐ")</del> *@</h4>
+							</div>
+						</a>
+						<div class="add-to-cart">
+							<button type="submit" class="btn btn-primary add-to-cart-btn" data-product_id="@relatedProduct.Id" @(relatedProduct.Quantity > 0 ? "" : "disabled")>
+								<i class="fa fa-shopping-cart"></i> @(relatedProduct.Quantity > 0 ? "Thêm vào giỏ" : "Hết hàng")
+							</button>
+
+						</div>
+					</div>
+				</div>
+
+			}
+
+
+		</div>
+
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+			$('.add-to-cart-btn').click(function () {
+				var Id = $(this).data("product_id");
+
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("AddCart", "Cart")",
+					data: { Id: Id },
+					success: function (result) {
+						if (result) {
+							Swal.fire("Thêm sản phẩm thành công");
+						}
+					},
+					error: function () {
+						Swal.fire("Sản phẩm đã hết hàng");
+					}
+				});
+			});
+		});
+	</script>
+	<!--/Yêu thích-->
+	<script>
+		$(document).ready(function () {
+			$('.add-to-wishlist').click(function () {
+				var Id = $(this).data("product_id");
+
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("AddWishlist", "Home")",
+					data: { Id: Id },
+					success: function (result) {
+						if (result) {
+							Swal.fire("Thêm sản phẩm yêu thích thành công");
+						}
+					},
+					error: function () {
+						Swal.fire("Đã xảy ra lỗi khi thêm sản phẩm yêu thích");
+					}
+				});
+			});
+		});
+	</script>
+	<!--/So sánh-->
+	<script>
+		$(document).ready(function () {
+			$('.add-to-compare').click(function () {
+				var Id = $(this).data("product_id");
+
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("AddCompare", "Home")",
+					data: { Id: Id },
+					success: function (result) {
+						if (result) {
+							Swal.fire("Thêm so sánh thành công");
+						}
+					},
+					error: function () {
+						Swal.fire("Đã xảy ra lỗi khi so sánh");
+					}
+				});
+			});
+		});
+	</script>
+}

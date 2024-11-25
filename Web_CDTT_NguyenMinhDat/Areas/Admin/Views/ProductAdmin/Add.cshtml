@@ -1,0 +1,110 @@
+﻿@using Web_CDTT_NguyenMinhDat.Models
+@model ProductModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h4>Add Products</h4>
+<div class="col-md-9">
+<form  asp-action="Add" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label>Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input asp-for="Price" pattern="[0-9.,]+" class="form-control typing-price"/>
+            <span id="price-convert"></span>
+            <span asp-validation-for="Price" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea asp-for="Description" class="form-control" ></textarea>
+            <span asp-validation-for="Description" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                <option>--Choose a category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Brand</label>
+            <select asp-for="BrandId" class="form-control" asp-items="ViewBag.Brands">
+                <option>--Choose a brand</option>
+            </select>
+            <span asp-validation-for="BrandId" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label>Image</label>
+            <input asp-for="ImageUpload" class="form-control"/>
+            <span asp-validation-for="ImageUpload" class="text-danger" />
+            <img id="imgpreview" class="pt-2" width="200" height="200" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary">Create</button>
+        </div>
+</form>
+    <a asp-action="ListProduct" class="btn btn-dark">Back To List</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description', {
+            allowedContent: true, 
+            entities: false, 
+            enterMode: CKEDITOR.ENTER_BR, 
+        });
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+
+        $(function () {
+            if ($("a.confirmDeletion").length) {
+                $("a.confirmDeletion").click(() => {
+                    if (!confirm("Confirm deletion")) return false;
+                });
+            }
+
+            if ($("div.alert.notification").length) {
+                setTimeout(() => {
+                    $("div.alert.notification").fadeOut();
+                }, 2000);
+            }
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#imgpreview").attr("src", e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <!--/Format price-->
+
+    <script>
+        $(".typing-price").on("keyup", function()
+        {
+            var currency_input = $(this).val();
+
+            $("#price-convert").html(new Intl.NumberFormat('vn-VN', {
+                style: 'currency', currency: 'VND'
+            }).format(currency_input));
+            });
+    </script>
+}

@@ -1,0 +1,22 @@
+﻿@{
+    var currentUrl = Url.ActionContext.HttpContext.Request.Path;
+}
+
+<div class="store-filter clearfix mb-4">
+    <div class="store-sort">
+        <label>
+            Sort By:
+            <select class="input-select" id="sort_by" onchange="updateSortOption()">
+                <option>------</option>
+                <option value="@currentUrl?sort_by=price_increase">Giá tăng dần</option>
+                <option value="@currentUrl?sort_by=price_decrease">Giá giảm dần</option>
+                <option value="@currentUrl?sort_by=price_newest">Mới nhất</option>
+                <option value="@currentUrl?sort_by=price_oldest">Cũ nhất</option>
+            </select>
+        </label>
+    </div>
+    <ul class="store-grid">
+        <li class="active"><i class="fa fa-th"></i></li>
+        <li><a href="#"><i class="fa fa-th-list"></i></a></li>
+    </ul>
+</div>

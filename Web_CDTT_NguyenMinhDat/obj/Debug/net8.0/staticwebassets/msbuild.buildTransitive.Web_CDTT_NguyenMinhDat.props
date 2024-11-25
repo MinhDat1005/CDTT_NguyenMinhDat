@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Web_CDTT_NguyenMinhDat.props" />
+</Project>

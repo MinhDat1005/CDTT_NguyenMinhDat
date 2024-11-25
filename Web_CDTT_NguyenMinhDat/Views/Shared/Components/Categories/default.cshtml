@@ -1,0 +1,24 @@
+﻿@* @model IEnumerable<CategoryModel>
+<div class="section-nav">
+    <ul class="section-tab-nav tab-nav">
+        @foreach (var item in Model)
+        {
+            <li ><a data-toggle="tab" asp-action="Index" asp-controller="Category" asp-route-Slug="@item.Slug">@item.Name</a></li>
+        }
+    </ul>
+</div>
+ *@
+
+ @model IEnumerable<CategoryModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="section-nav">
+    <ul class="section-tab-nav tab-nav">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a asp-action="Index" asp-controller="Category" asp-route-Slug="@item.Slug">@item.Name</a>
+            </li>
+        }
+    </ul>
+</div>

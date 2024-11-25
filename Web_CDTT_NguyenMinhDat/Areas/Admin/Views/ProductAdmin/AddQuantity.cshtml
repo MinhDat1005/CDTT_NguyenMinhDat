@@ -1,0 +1,59 @@
+﻿@using Web_CDTT_NguyenMinhDat.Models
+@model ProductsQuantityModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Add Quantity";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int total_quantities = 0;
+    int key = 1;
+}
+<h4>Add Quantity</h4>
+<div class="col-md-9">
+    <form asp-action="AddQuantity" method="post" asp-controller="ProductAdmin">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" name="ProductId" value="@ViewBag.Id"/>
+        <div class="form-group">
+            <label>Quantity</label>
+            <input min="1" value="1" max="3000" asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger" />
+        </div>
+        
+        <div class="form-group">
+            <button class="btn btn-primary">Create</button>
+        </div>
+    </form>
+    <!--------------------------------------------------------------------->
+    <h3>List Quantities</h3>
+    <div class="mb-3">
+        <table class="table table-bordered" >
+            <thead>
+                <tr class="table-warning">
+                    <th>Key</th>
+
+                    <th>Quantity</th>
+                    <th>DateTime</th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var productQuantity in ViewBag.ProductByQuantity)
+                {
+                    total_quantities += productQuantity.Quantity;
+                    <tr>
+                        <td>@key</td>
+                        <td>@productQuantity.Quantity</td>
+                        <td>@productQuantity.DateCreated</td>
+                 
+                    </tr>
+                    key++;
+                }
+                <tr>
+                    <td>Total Quatities: @total_quantities</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--------------------------------------------------------------------->
+    <a asp-action="ListProduct" class="btn btn-dark">Back To List</a>
+</div>

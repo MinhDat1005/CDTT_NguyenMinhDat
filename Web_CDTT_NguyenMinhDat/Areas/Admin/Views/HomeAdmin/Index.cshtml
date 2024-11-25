@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<h3>Dashboard Statistic</h3>
+
+<div class="row">
+    <div class="col-md-3">
+        <p>Thống kê sản phẩm : @ViewBag.CountProduct</p>
+    
+    </div>
+    <div class="col-md-3">
+        <p>Thống kê đơn hàng : @ViewBag.CountOrder</p>
+       
+
+    </div>
+    <div class="col-md-3">
+        <p>Thống kê danh mục : @ViewBag.CountCategory</p>
+        
+    </div>
+    <div class="col-md-3">
+        <p>Thống kê user : @ViewBag.CountUser</p>
+        
+    </div>
+</div>
+<div class="row">
+    <h5>Biểu đồ thống kê</h5>
+    <div id="myfirstchart" style="height: 250px;"></div>
+</div>
+
+<style>
+    .row {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+    }
+
+        .row .col-md-3 {
+            background-color: #f8f9fa; 
+            border: 1px solid #ddd; 
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+        }
+
+            .row .col-md-3 p {
+                font-size: 16px;
+                font-weight: bold;
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            .row .col-md-3 span {
+                font-size: 24px;
+                color: #007bff; /* Accent color */
+            }
+
+</style>
+
+@section Scripts
+{
+    <script>
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                { year: '2008', value: 20 },
+                { year: '2009', value: 10 },
+                { year: '2010', value: 5 },
+                { year: '2011', value: 5 },
+                { year: '2012', value: 20 }
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'year',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Value']
+        });
+    </script>
+}
